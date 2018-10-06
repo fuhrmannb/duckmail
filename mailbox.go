@@ -10,7 +10,6 @@ import (
 )
 
 const (
-	LDRTrigger              = 400
 	LDRWindowSize           = 10
 	LEDNotifDuration        = 2 * time.Second
 	LEDNotifPushingInterval = 10 * time.Millisecond
@@ -18,13 +17,15 @@ const (
 )
 
 type Mailbox struct {
-	LED       *DuckLed
-	LDR       *aio.AnalogSensorDriver
-	MailNotif *MailgunNotification
-	Person    Person
+	LED        *DuckLed
+	LDR        *aio.AnalogSensorDriver
+	LDRTrigger int
+	MailNotif  *MailgunNotification
+	Person     Person
 
 	ledTicker *time.Ticker
 	ledSum    int
+	ldrValue  *movingaverage.MovingAverage
 }
 
 func (m *Mailbox) Start() {
@@ -33,12 +34,14 @@ func (m *Mailbox) Start() {
 }
 
 func (m *Mailbox) onLDRValue(s interface{}) {
-	value := movingaverage.New(LDRWindowSize)
-	value.Add(float64(s.(int)))
+	if m.ldrValue == nil {
+		m.ldrValue = movingaverage.New(LDRWindowSize)
+	}
+	m.ldrValue.Add(float64(s.(int)))
 
-	if value.Avg() < LDRTrigger {
+	if m.ldrValue.Avg() < float64(m.LDRTrigger) {
 		if m.ledTicker == nil {
-			fmt.Printf("Mail received! (LDR value: %v)\n", value.Avg())
+			fmt.Printf("Mail received! (LDR value: %v)\n", m.ldrValue.Avg())
 			m.ledTicker = m.blinkLed()
 			err := m.MailNotif.Send(m.Person)
 			if err != nil {
@@ -47,7 +50,7 @@ func (m *Mailbox) onLDRValue(s interface{}) {
 		}
 	} else {
 		if m.ledTicker != nil {
-			fmt.Printf("Email empty (LDR value: %v)\n", value.Avg())
+			fmt.Printf("Email empty (LDR value: %v)\n", m.ldrValue.Avg())
 			m.ledTicker.Stop()
 			m.ledTicker = nil
 			m.LED.Off()

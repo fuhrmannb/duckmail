@@ -25,17 +25,19 @@ func StartController(cfg *RootCfg) {
 
 	// Mailgun cfg
 	mailNotif := &MailgunNotification{
-		Mailgun: mailgun.NewMailgun(cfg.Mailgun.Domain, cfg.Mailgun.PrivateKey, cfg.Mailgun.PublicKey),
+		Mailgun:       mailgun.NewMailgun(cfg.Mailgun.Domain, cfg.Mailgun.PrivateKey, cfg.Mailgun.PublicKey),
+		SenderAddress: cfg.Mailgun.SenderAddress,
 	}
 
 	// Mailbox creation
 	var boxes []*Mailbox
 	for _, boxCfg := range cfg.Mailboxes {
 		box := &Mailbox{
-			LED:       &DuckLed{gpio.NewLedDriver(firmataAdaptor, boxCfg.Arduino.LedPin)},
-			LDR:       aio.NewAnalogSensorDriver(firmataAdaptor, boxCfg.Arduino.LDRPin, LDRPollingInterval),
-			MailNotif: mailNotif,
-			Person:    boxCfg.Person,
+			LED:        &DuckLed{gpio.NewLedDriver(firmataAdaptor, boxCfg.Arduino.LedPin)},
+			LDR:        aio.NewAnalogSensorDriver(firmataAdaptor, boxCfg.Arduino.LDRPin, LDRPollingInterval),
+			LDRTrigger: cfg.Arduino.LDRTrigger,
+			MailNotif:  mailNotif,
+			Person:     boxCfg.Person,
 		}
 		// Configure LED
 		box.LED.SetName(fmt.Sprintf("LED-%v-pin%v", boxCfg.Person.Name, box.LED.Pin()))

@@ -6,7 +6,6 @@ import (
 )
 
 const (
-	MailgunSender  = "noreply@duckmail.com"
 	MailgunSubject = "DuckMail - You have a new mail"
 	MailgunBody    = `Hey!
 Check your mail inbox to retrieve your (IRL) mail!
@@ -17,11 +16,12 @@ Duckmail, a duck who likes to check mails
 )
 
 type MailgunNotification struct {
-	Mailgun mailgun.Mailgun
+	Mailgun       mailgun.Mailgun
+	SenderAddress string
 }
 
 func (m *MailgunNotification) Send(p Person) error {
-	msg := m.Mailgun.NewMessage(MailgunSender, MailgunSubject, MailgunBody, p.Email)
+	msg := m.Mailgun.NewMessage(m.SenderAddress, MailgunSubject, MailgunBody, p.Email)
 	resp, id, err := m.Mailgun.Send(msg)
 	if err != nil {
 		return err

@@ -7,13 +7,15 @@ type RootCfg struct {
 }
 
 type ArduinoCfg struct {
-	Path string
+	Path       string
+	LDRTrigger int `mapstructure:"ldr_trigger"`
 }
 
 type MailgunCfg struct {
-	Domain     string
-	PrivateKey string `mapstructure:"private_key"`
-	PublicKey  string `mapstructure:"public_key"`
+	Domain        string
+	PrivateKey    string `mapstructure:"private_key"`
+	PublicKey     string `mapstructure:"public_key"`
+	SenderAddress string `mapstructure:"sender_address"`
 }
 
 type MailboxArduinoCfg struct {
