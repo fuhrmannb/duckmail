@@ -1,7 +1,6 @@
 package duckmail
 
 import (
-	"fmt"
 	"github.com/RobinUS2/golang-moving-average"
 	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/drivers/aio"
@@ -41,7 +40,7 @@ func (m *Mailbox) onLDRValue(s interface{}) {
 
 	if m.ldrValue.Avg() < float64(m.LDRTrigger) {
 		if m.ledTicker == nil {
-			fmt.Printf("Mail received! (LDR value: %v)\n", m.ldrValue.Avg())
+			log.Printf("Mailbox: mail received! (LDR value: %v)\n", m.ldrValue.Avg())
 			m.ledTicker = m.blinkLed()
 			err := m.MailNotif.Send(m.Person)
 			if err != nil {
@@ -50,7 +49,7 @@ func (m *Mailbox) onLDRValue(s interface{}) {
 		}
 	} else {
 		if m.ledTicker != nil {
-			fmt.Printf("Email empty (LDR value: %v)\n", m.ldrValue.Avg())
+			log.Printf("Mailbox: now empty (LDR value: %v)\n", m.ldrValue.Avg())
 			m.ledTicker.Stop()
 			m.ledTicker = nil
 			m.LED.Off()

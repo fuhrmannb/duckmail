@@ -27,6 +27,7 @@ func StartController(cfg *RootCfg) {
 	mailNotif := &MailgunNotification{
 		Mailgun:       mailgun.NewMailgun(cfg.Mailgun.Domain, cfg.Mailgun.PrivateKey, cfg.Mailgun.PublicKey),
 		SenderAddress: cfg.Mailgun.SenderAddress,
+		SendTimeout:   cfg.Mailgun.SendTimeout,
 	}
 
 	// Mailbox creation

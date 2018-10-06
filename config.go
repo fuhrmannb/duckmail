@@ -1,5 +1,7 @@
 package duckmail
 
+import "time"
+
 type RootCfg struct {
 	Arduino   ArduinoCfg
 	Mailgun   MailgunCfg
@@ -13,9 +15,10 @@ type ArduinoCfg struct {
 
 type MailgunCfg struct {
 	Domain        string
-	PrivateKey    string `mapstructure:"private_key"`
-	PublicKey     string `mapstructure:"public_key"`
-	SenderAddress string `mapstructure:"sender_address"`
+	PrivateKey    string        `mapstructure:"private_key"`
+	PublicKey     string        `mapstructure:"public_key"`
+	SenderAddress string        `mapstructure:"sender_address"`
+	SendTimeout   time.Duration `mapstructure:"send_timeout"`
 }
 
 type MailboxArduinoCfg struct {
