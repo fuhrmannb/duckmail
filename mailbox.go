@@ -1,11 +1,12 @@
 package duckmail
 
 import (
-	"github.com/RobinUS2/golang-moving-average"
-	"gobot.io/x/gobot"
-	"gobot.io/x/gobot/drivers/aio"
 	"log"
 	"time"
+
+	movingaverage "github.com/RobinUS2/golang-moving-average"
+	"gobot.io/x/gobot"
+	"gobot.io/x/gobot/drivers/aio"
 )
 
 const (
