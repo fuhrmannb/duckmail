@@ -1,9 +1,10 @@
 package duckmail
 
 import (
-	"gopkg.in/mailgun/mailgun-go.v1"
 	"log"
 	"time"
+
+	mailgun "gopkg.in/mailgun/mailgun-go.v1"
 )
 
 const (

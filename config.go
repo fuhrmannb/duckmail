@@ -9,8 +9,7 @@ type RootCfg struct {
 }
 
 type ArduinoCfg struct {
-	Path       string
-	LDRTrigger int `mapstructure:"ldr_trigger"`
+	Path string
 }
 
 type MailgunCfg struct {
@@ -22,8 +21,9 @@ type MailgunCfg struct {
 }
 
 type MailboxArduinoCfg struct {
-	LedPin string `mapstructure:"led_pin"`
-	LDRPin string `mapstructure:"ldr_pin"`
+	LedPin     string `mapstructure:"led_pin"`
+	LDRPin     string `mapstructure:"ldr_pin"`
+	LDRTrigger int    `mapstructure:"ldr_trigger"`
 }
 
 type MailboxCfg struct {

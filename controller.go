@@ -2,12 +2,13 @@ package duckmail
 
 import (
 	"fmt"
+	"time"
+
 	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/drivers/aio"
 	"gobot.io/x/gobot/drivers/gpio"
 	"gobot.io/x/gobot/platforms/firmata"
-	"gopkg.in/mailgun/mailgun-go.v1"
-	"time"
+	mailgun "gopkg.in/mailgun/mailgun-go.v1"
 )
 
 const (
@@ -36,7 +37,7 @@ func StartController(cfg *RootCfg) {
 		box := &Mailbox{
 			LED:        &DuckLed{gpio.NewLedDriver(firmataAdaptor, boxCfg.Arduino.LedPin)},
 			LDR:        aio.NewAnalogSensorDriver(firmataAdaptor, boxCfg.Arduino.LDRPin, LDRPollingInterval),
-			LDRTrigger: cfg.Arduino.LDRTrigger,
+			LDRTrigger: boxCfg.Arduino.LDRTrigger,
 			MailNotif:  mailNotif,
 			Person:     boxCfg.Person,
 		}
