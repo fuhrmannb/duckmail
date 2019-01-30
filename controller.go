@@ -15,7 +15,7 @@ const (
 	LDRPollingInterval = 10 * time.Millisecond
 )
 
-func StartController(cfg *RootCfg) {
+func StartController(cfg *RootCfg) error {
 	// Robot cfg
 	robot := gobot.NewRobot("duckmail")
 
@@ -60,5 +60,8 @@ func StartController(cfg *RootCfg) {
 	}
 
 	// Let's go friends!
-	robot.Start()
+	if err := robot.Start(); err != nil {
+		return err
+	}
+	return nil
 }

@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/fuhrmannb/duckmail"
-	"github.com/mitchellh/go-homedir"
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 	"os"
 	"path/filepath"
+
+	"github.com/fuhrmannb/duckmail"
+	homedir "github.com/mitchellh/go-homedir"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var cfgPath string
@@ -15,7 +16,7 @@ var cfgPath string
 var rootCmd = &cobra.Command{
 	Use:   "duckmail",
 	Short: "Duckmail is an app that send notification when a mail has been received",
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		// Read config
 		var cfg duckmail.RootCfg
 		if err := viper.Unmarshal(&cfg); err != nil {
@@ -23,7 +24,10 @@ var rootCmd = &cobra.Command{
 		}
 
 		// Start Duckmail controller
-		duckmail.StartController(&cfg)
+		if err := duckmail.StartController(&cfg); err != nil {
+			return err
+		}
+		return nil
 	},
 }
 
