@@ -9,19 +9,17 @@ import (
 	"gobot.io/x/gobot/drivers/aio"
 )
 
-const (
-	LDRWindowSize           = 10
-	LEDNotifDuration        = 2 * time.Second
-	LEDNotifPushingInterval = 10 * time.Millisecond
-	LEDRange                = int(512 * LEDNotifPushingInterval / LEDNotifDuration)
-)
-
 type Mailbox struct {
-	LED        *DuckLed
-	LDR        *aio.AnalogSensorDriver
-	LDRTrigger int
-	MailNotif  *MailgunNotification
-	Person     Person
+	LED                     *DuckLed
+	LEDNotifDuration        time.Duration
+	LEDNotifPushingInterval time.Duration
+
+	LDR           *aio.AnalogSensorDriver
+	LDRTrigger    int
+	LDRWindowSize int
+
+	MailNotif *MailgunNotification
+	Person    Person
 
 	ledTicker *time.Ticker
 	ledSum    int
@@ -35,7 +33,7 @@ func (m *Mailbox) Start() {
 
 func (m *Mailbox) onLDRValue(s interface{}) {
 	if m.ldrValue == nil {
-		m.ldrValue = movingaverage.New(LDRWindowSize)
+		m.ldrValue = movingaverage.New(m.LDRWindowSize)
 	}
 	m.ldrValue.Add(float64(s.(int)))
 
@@ -59,9 +57,10 @@ func (m *Mailbox) onLDRValue(s interface{}) {
 }
 
 func (m *Mailbox) blinkLed() *time.Ticker {
+	ledRange := int(512 * m.LEDNotifPushingInterval / m.LEDNotifDuration)
 	m.ledSum = 0
-	t := gobot.Every(LEDNotifPushingInterval, func() {
-		m.ledSum = (m.ledSum + LEDRange) % 512
+	t := gobot.Every(m.LEDNotifPushingInterval, func() {
+		m.ledSum = (m.ledSum + ledRange) % 512
 		var brightness uint8
 		if m.ledSum > 255 {
 			brightness = uint8(511 - m.ledSum)

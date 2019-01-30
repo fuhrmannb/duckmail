@@ -2,17 +2,12 @@ package duckmail
 
 import (
 	"fmt"
-	"time"
 
 	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/drivers/aio"
 	"gobot.io/x/gobot/drivers/gpio"
 	"gobot.io/x/gobot/platforms/firmata"
 	mailgun "gopkg.in/mailgun/mailgun-go.v1"
-)
-
-const (
-	LDRPollingInterval = 10 * time.Millisecond
 )
 
 func StartController(cfg *RootCfg) error {
@@ -35,11 +30,14 @@ func StartController(cfg *RootCfg) error {
 	var boxes []*Mailbox
 	for _, boxCfg := range cfg.Mailboxes {
 		box := &Mailbox{
-			LED:        &DuckLed{gpio.NewLedDriver(firmataAdaptor, boxCfg.Arduino.LedPin)},
-			LDR:        aio.NewAnalogSensorDriver(firmataAdaptor, boxCfg.Arduino.LDRPin, LDRPollingInterval),
-			LDRTrigger: boxCfg.Arduino.LDRTrigger,
-			MailNotif:  mailNotif,
-			Person:     boxCfg.Person,
+			LED:                     &DuckLed{gpio.NewLedDriver(firmataAdaptor, boxCfg.Arduino.LedPin)},
+			LEDNotifDuration:        cfg.Arduino.LEDNotifDuration,
+			LEDNotifPushingInterval: cfg.Arduino.LEDNotifPushingInterval,
+			LDR:                     aio.NewAnalogSensorDriver(firmataAdaptor, boxCfg.Arduino.LDRPin, cfg.Arduino.LDRPollingInterval),
+			LDRTrigger:              boxCfg.Arduino.LDRTrigger,
+			LDRWindowSize:           cfg.Arduino.LDRWindowSize,
+			MailNotif:               mailNotif,
+			Person:                  boxCfg.Person,
 		}
 		// Configure LED
 		box.LED.SetName(fmt.Sprintf("LED-%v-pin%v", boxCfg.Person.Name, box.LED.Pin()))

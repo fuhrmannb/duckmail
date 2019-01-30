@@ -9,7 +9,11 @@ type RootCfg struct {
 }
 
 type ArduinoCfg struct {
-	Path string
+	Path                    string
+	LDRPollingInterval      time.Duration `mapstructure:"ldr_polling_interval"`
+	LDRWindowSize           int           `mapstructure:"ldr_window_size"`
+	LEDNotifDuration        time.Duration `mapstructure:"led_notif_duration"`
+	LEDNotifPushingInterval time.Duration `mapstructure:"led_notif_pushing_interval"`
 }
 
 type MailgunCfg struct {
