@@ -4,6 +4,7 @@ import "time"
 
 type RootCfg struct {
 	Arduino   ArduinoCfg
+	Discord   DiscordCfg
 	Mailgun   MailgunCfg
 	Mailboxes []MailboxCfg
 }
@@ -14,6 +15,10 @@ type ArduinoCfg struct {
 	LDRWindowSize           int           `mapstructure:"ldr_window_size"`
 	LEDNotifDuration        time.Duration `mapstructure:"led_notif_duration"`
 	LEDNotifPushingInterval time.Duration `mapstructure:"led_notif_pushing_interval"`
+}
+
+type DiscordCfg struct {
+	Token string
 }
 
 type MailgunCfg struct {

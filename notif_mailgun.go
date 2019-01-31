@@ -15,6 +15,7 @@ Maybe a good news... :)
 
 Duckmail, a duck who likes to check mails
 `
+	MailgunNotifName = "Mailgun"
 )
 
 type MailgunNotification struct {
@@ -25,7 +26,16 @@ type MailgunNotification struct {
 	nextSend time.Time
 }
 
+func (m *MailgunNotification) Name() string {
+	return MailgunNotifName
+}
+
 func (m *MailgunNotification) Send(p Person) error {
+	// No notification if no mail specified
+	if p.Email == "" {
+		return nil
+	}
+
 	// Do not resend a email before timeout expired
 	if time.Now().Before(m.nextSend) {
 		return nil

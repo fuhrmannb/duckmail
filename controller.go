@@ -3,6 +3,7 @@ package duckmail
 import (
 	"fmt"
 
+	"github.com/bwmarrin/discordgo"
 	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/drivers/aio"
 	"gobot.io/x/gobot/drivers/gpio"
@@ -19,12 +20,25 @@ func StartController(cfg *RootCfg) error {
 	firmataAdaptor.SetName("Arduino-Firmata")
 	robot.AddConnection(firmataAdaptor)
 
-	// Mailgun cfg
+	// Notifiers cfg
+	// Mailgun
 	mailNotif := &MailgunNotification{
 		Mailgun:       mailgun.NewMailgun(cfg.Mailgun.Domain, cfg.Mailgun.PrivateKey, cfg.Mailgun.PublicKey),
 		SenderAddress: cfg.Mailgun.SenderAddress,
 		SendTimeout:   cfg.Mailgun.SendTimeout,
 	}
+	// Discord
+	discordSession, err := discordgo.New("Bot " + cfg.Discord.Token)
+	if err != nil {
+		return err
+	}
+	err = discordSession.Open()
+	if err != nil {
+		return err
+	}
+	discordNotif := &DiscordNotification{Session: discordSession}
+	// All in one slice!
+	notifiers := []Notifier{mailNotif, discordNotif}
 
 	// Mailbox creation
 	var boxes []*Mailbox
@@ -36,7 +50,7 @@ func StartController(cfg *RootCfg) error {
 			LDR:                     aio.NewAnalogSensorDriver(firmataAdaptor, boxCfg.Arduino.LDRPin, cfg.Arduino.LDRPollingInterval),
 			LDRTrigger:              boxCfg.Arduino.LDRTrigger,
 			LDRWindowSize:           cfg.Arduino.LDRWindowSize,
-			MailNotif:               mailNotif,
+			Notifiers:               notifiers,
 			Person:                  boxCfg.Person,
 		}
 		// Configure LED

@@ -18,7 +18,7 @@ type Mailbox struct {
 	LDRTrigger    int
 	LDRWindowSize int
 
-	MailNotif *MailgunNotification
+	Notifiers []Notifier
 	Person    Person
 
 	ledTicker *time.Ticker
@@ -40,15 +40,21 @@ func (m *Mailbox) onLDRValue(s interface{}) {
 	if m.ldrValue.Avg() < float64(m.LDRTrigger) {
 		if m.ledTicker == nil {
 			log.Printf("Mail received for %v (LDR value: %v)\n", m.Person.Name, m.ldrValue.Avg())
+
+			// Blink LED
 			m.ledTicker = m.blinkLed()
-			err := m.MailNotif.Send(m.Person)
-			if err != nil {
-				log.Printf("Error during Mailgun email sending: %v", err)
+
+			// Notify Mailgun/Discord/...
+			for _, not := range m.Notifiers {
+				err := not.Send(m.Person)
+				if err != nil {
+					log.Printf("Error during %v notification: %v", not.Name(), err)
+				}
 			}
 		}
 	} else {
 		if m.ledTicker != nil {
-			log.Printf("Mailbox %v now empty (LDR value: %v)\n", m.ldrValue.Avg())
+			log.Printf("Mailbox %v now empty (LDR value: %v)\n", m.Person.Name, m.ldrValue.Avg())
 			m.ledTicker.Stop()
 			m.ledTicker = nil
 			m.LED.Off()

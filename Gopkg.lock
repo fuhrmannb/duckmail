@@ -10,6 +10,14 @@
   revision = "a016505bdd52cdc7f048bd0007af882f6b397faf"
 
 [[projects]]
+  digest = "1:fc4f149402c1fa7258290c3f91b0bfbc709763f3d3899609a2e4a0163dec65c6"
+  name = "github.com/bwmarrin/discordgo"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "8325a6bf6dd6c91ed4040a1617b07287b8fb0eba"
+  version = "v0.19.0"
+
+[[projects]]
   branch = "master"
   digest = "1:210dd3b6f30ebc5ff2e0b4795b5141ee4578c29b38df0326fb140863d45c01fa"
   name = "github.com/creack/goselect"
@@ -43,6 +51,14 @@
   ]
   pruneopts = "UT"
   revision = "e78417b510a348171f21754ff934fe8408b21b90"
+
+[[projects]]
+  digest = "1:7b5c6e2eeaa9ae5907c391a91c132abfd5c9e8a784a341b5625e750c67e6825d"
+  name = "github.com/gorilla/websocket"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "66b9c49e59c6c48f0ffce28c2d8b8a5678502c6d"
+  version = "v1.4.0"
 
 [[projects]]
   digest = "1:0ade334594e69404d80d9d323445d2297ff8161637f9b2d347cc6973d2d6f05b"
@@ -263,6 +279,19 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:a68068595227881a09dd5961976ddf705c8eea822dcd1c7b57bbb0067335ad32"
+  name = "golang.org/x/crypto"
+  packages = [
+    "internal/subtle",
+    "nacl/secretbox",
+    "poly1305",
+    "salsa20/salsa",
+  ]
+  pruneopts = "UT"
+  revision = "b01c7a72566457eb1420261cdafef86638fc3861"
+
+[[projects]]
+  branch = "master"
   digest = "1:7941e2f16c0833b438cbef7fccfe4f8346f9f7876b42b29717a75d7e8c4800cb"
   name = "golang.org/x/sys"
   packages = [
@@ -308,6 +337,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/RobinUS2/golang-moving-average",
+    "github.com/bwmarrin/discordgo",
     "github.com/mitchellh/go-homedir",
     "github.com/spf13/cobra",
     "github.com/spf13/viper",
