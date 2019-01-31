@@ -39,7 +39,7 @@ func (m *Mailbox) onLDRValue(s interface{}) {
 
 	if m.ldrValue.Avg() < float64(m.LDRTrigger) {
 		if m.ledTicker == nil {
-			log.Printf("Mailbox: mail received! (LDR value: %v)\n", m.ldrValue.Avg())
+			log.Printf("Mail received for %v (LDR value: %v)\n", m.Person.Name, m.ldrValue.Avg())
 			m.ledTicker = m.blinkLed()
 			err := m.MailNotif.Send(m.Person)
 			if err != nil {
@@ -48,7 +48,7 @@ func (m *Mailbox) onLDRValue(s interface{}) {
 		}
 	} else {
 		if m.ledTicker != nil {
-			log.Printf("Mailbox: now empty (LDR value: %v)\n", m.ldrValue.Avg())
+			log.Printf("Mailbox %v now empty (LDR value: %v)\n", m.ldrValue.Avg())
 			m.ledTicker.Stop()
 			m.ledTicker = nil
 			m.LED.Off()
