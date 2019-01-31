@@ -27,7 +27,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:9d5b78db7ba85bf3430d7a8a0be3e8c0fa9e9d237dfb1b0a22b521824f504559"
+  digest = "1:89ac69a1aeb4dee0e535094f4705e8eb15607fa94ba49cf574cf52cbda12373e"
   name = "github.com/go-ble/ble"
   packages = [
     ".",
@@ -42,23 +42,23 @@
     "linux/hci/socket",
   ]
   pruneopts = "UT"
-  revision = "11b1dad1df3d73d0ff11b08fb156c617b7687f29"
+  revision = "e78417b510a348171f21754ff934fe8408b21b90"
 
 [[projects]]
-  branch = "master"
-  digest = "1:d1971637b21871ec2033a44ca87c99c5608a7340cb34ec75fab8d2ab503276c9"
+  digest = "1:0ade334594e69404d80d9d323445d2297ff8161637f9b2d347cc6973d2d6f05b"
   name = "github.com/hashicorp/errwrap"
   packages = ["."]
   pruneopts = "UT"
-  revision = "d6c0cd88035724dd42e0f335ae30161c20575ecc"
+  revision = "8a6fb523712970c966eefc6b39ed2c5e74880354"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
-  digest = "1:46fb6a9f1b9667f32ac93e08b1da118b2c666991424ea12e848b05d4fe5155ef"
+  digest = "1:f668349b83f7d779567c880550534addeca7ebadfdcf44b0b9c39be61864b4b7"
   name = "github.com/hashicorp/go-multierror"
   packages = ["."]
   pruneopts = "UT"
-  revision = "3d5d8f294aa03d8e98859feac328afbdf1ae0703"
+  revision = "886a7fbe3eb1c874d46f623bfa70af45f425b3d1"
 
 [[projects]]
   digest = "1:c0d19ab64b32ce9fe5cf4ddceba78d5bc9807f0016db6b1183599da3dcc24d10"
@@ -104,12 +104,12 @@
   version = "v0.0.9"
 
 [[projects]]
-  digest = "1:d4d17353dbd05cb52a2a52b7fe1771883b682806f68db442b436294926bbfafb"
+  digest = "1:0981502f9816113c9c8c4ac301583841855c8cf4da8c72f696b3ebedf6d0e4e5"
   name = "github.com/mattn/go-isatty"
   packages = ["."]
   pruneopts = "UT"
-  revision = "0360b2af4f38e8d38c7fce2a9f4e702702d73a39"
-  version = "v0.0.3"
+  revision = "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c"
+  version = "v0.0.4"
 
 [[projects]]
   branch = "master"
@@ -128,12 +128,12 @@
   version = "v1"
 
 [[projects]]
-  digest = "1:78bbb1ba5b7c3f2ed0ea1eab57bdd3859aec7e177811563edc41198a760b06af"
+  digest = "1:5d231480e1c64a726869bc4142d270184c419749d34f167646baa21008eb0a79"
   name = "github.com/mitchellh/go-homedir"
   packages = ["."]
   pruneopts = "UT"
-  revision = "ae18d6b8b3205b561c79e8e5f69bff09736185f4"
-  version = "v1.0.0"
+  revision = "af06845cf3004701891bf4fdb884bfe4920b3727"
+  version = "v1.1.0"
 
 [[projects]]
   digest = "1:53bc4cd4914cd7cd52139990d5170d6dc99067ae31c56530621b18b35fc30318"
@@ -152,12 +152,12 @@
   version = "v1.2.0"
 
 [[projects]]
-  digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
+  digest = "1:cf31692c14422fa27c83a05292eb5cbe0fb2775972e8f1f8446a71549bd8980b"
   name = "github.com/pkg/errors"
   packages = ["."]
   pruneopts = "UT"
-  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
-  version = "v0.8.0"
+  revision = "ba968bfe8b2f7e042a574c888954fccecfa385b4"
+  version = "v0.8.1"
 
 [[projects]]
   branch = "master"
@@ -165,7 +165,7 @@
   name = "github.com/raff/goble"
   packages = ["xpc"]
   pruneopts = "UT"
-  revision = "efeac611681b89806d673dfbd8fc1690ca6bd093"
+  revision = "9e7c60f05beb473333a36c7da6a67e09d6fa770d"
 
 [[projects]]
   branch = "master"
@@ -184,15 +184,15 @@
   revision = "f19e41f79f8f006116f682c1af454591bc278ad4"
 
 [[projects]]
-  digest = "1:6a4a11ba764a56d2758899ec6f3848d24698d48442ebce85ee7a3f63284526cd"
+  digest = "1:3e39bafd6c2f4bf3c76c3bfd16a2e09e016510ad5db90dc02b88e2f565d6d595"
   name = "github.com/spf13/afero"
   packages = [
     ".",
     "mem",
   ]
   pruneopts = "UT"
-  revision = "d40851caa0d747393da1ffb28f7f9d8b4eeffebd"
-  version = "v1.1.2"
+  revision = "f4711e4db9e9a1d3887343acb72b2bbfc2f686f5"
+  version = "v1.2.1"
 
 [[projects]]
   digest = "1:08d65904057412fc0270fc4812a1c90c594186819243160dc779a402d4b6d0bc"
@@ -219,12 +219,12 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:9424f440bba8f7508b69414634aef3b2b3a877e522d8a4624692412805407bb7"
+  digest = "1:c1b1102241e7f645bc8e0c22ae352e8f0dc6484b6cb4d132fa9f24174e0119e2"
   name = "github.com/spf13/pflag"
   packages = ["."]
   pruneopts = "UT"
-  revision = "583c0c0531f06d5278b7d917446061adc344b5cd"
-  version = "v1.0.1"
+  revision = "298182f68c66c05229eb03ac171abe6e309ee79a"
+  version = "v1.0.3"
 
 [[projects]]
   digest = "1:de37e343c64582d7026bf8ab6ac5b22a72eac54f3a57020db31524affed9f423"
@@ -236,17 +236,17 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:7e94cf13df3d9cb878911a055827f19837a190f644ba3dd72424bfcc0e85b368"
+  digest = "1:177147c6beea9efbe2e2f58b17ff1686f084ac7d7f4b6a36e085f8cb98e106a0"
   name = "go.bug.st/serial.v1"
   packages = [
     ".",
     "unixutils",
   ]
   pruneopts = "UT"
-  revision = "eae1344f9f90101f887b08d13391c34399f97873"
+  revision = "5f7892a7bb453066bdc6683b9b5d24d9dee03ec1"
 
 [[projects]]
-  digest = "1:88d1fec5dd1f8a50586c1f6d17c28fb5593776c489c8eedaca189bcf9aea3964"
+  digest = "1:90dae8bdaa7a9061919d4fe9b71eaf737e5fd770d2ad758eef51fe3ac1d481fb"
   name = "gobot.io/x/gobot"
   packages = [
     ".",
@@ -258,19 +258,19 @@
     "platforms/firmata/client",
   ]
   pruneopts = "UT"
-  revision = "c1d0e3ce485df0b45076d1d93b7d9240b770d5fc"
-  version = "1.11.1"
+  revision = "ed531980b4efe72c4fd9e768171855de3af2d718"
+  version = "v1.12.0"
 
 [[projects]]
   branch = "master"
-  digest = "1:bdd70b95d2f0faaad6d9e259aad84738c6bdeb8f45245be6487e88df45f5a0f1"
+  digest = "1:7941e2f16c0833b438cbef7fccfe4f8346f9f7876b42b29717a75d7e8c4800cb"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
   pruneopts = "UT"
-  revision = "0ffbfd41fbef8ffcf9b62b0b0aa3a5873ed7a4fe"
+  revision = "aca44879d5644da7c5b8ec6a1115e9b6ea6c40d9"
 
 [[projects]]
   digest = "1:8029e9743749d4be5bc9f7d42ea1659471767860f0cdc34d37c3111bd308a295"
@@ -288,12 +288,12 @@
   version = "v0.3.0"
 
 [[projects]]
-  digest = "1:c30b57e29c4382537286c27e1e4e9b3fb7aa6a4313d0d80b638884c2c3e75d2d"
+  digest = "1:6ad77325212e02cc2c76bc974fcfb59a227018afddbd3bc78ea3cc53dadb2554"
   name = "gopkg.in/mailgun/mailgun-go.v1"
   packages = ["."]
   pruneopts = "UT"
-  revision = "a4002e2df2e8ca2da6a6fbb4a72871b504e49f50"
-  version = "v1.1.0"
+  revision = "28c45085c063854b83107df6cf37ad8f88462105"
+  version = "v1.1.1"
 
 [[projects]]
   digest = "1:4d2e5a73dc1500038e504a8d78b986630e3626dc027bc030ba5c75da257cdb96"

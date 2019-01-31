@@ -27,15 +27,15 @@
 
 [[constraint]]
   name = "gobot.io/x/gobot"
-  version = "1.11.1"
+  version = "1.12.0"
 
 [prune]
   go-tests = true
   unused-packages = true
 
 [[constraint]]
-  name = "gopkg.in/mailgun/mailgun-go.v1"
-  version = "1.1.0"
+  name = "gopkg.in/mailgun/mailgun-go.v3"
+  version = "3.3.0"
 
 [[constraint]]
   name = "github.com/spf13/cobra"
