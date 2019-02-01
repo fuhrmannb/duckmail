@@ -36,7 +36,10 @@ func StartController(cfg *RootCfg) error {
 	if err != nil {
 		return err
 	}
-	discordNotif := &DiscordNotification{Session: discordSession}
+	discordNotif := &DiscordNotification{
+		Session:     discordSession,
+		SendTimeout: cfg.Discord.SendTimeout,
+	}
 	// All in one slice!
 	notifiers := []Notifier{mailNotif, discordNotif}
 

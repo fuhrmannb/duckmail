@@ -13,7 +13,8 @@ const (
 )
 
 type DiscordNotification struct {
-	Session *discordgo.Session
+	Session     *discordgo.Session
+	SendTimeout time.Duration
 
 	nextSend time.Time
 }
@@ -25,6 +26,11 @@ func (m *DiscordNotification) Name() string {
 func (d *DiscordNotification) Send(p Person) error {
 	// No notification if no discord ID specified
 	if p.DiscordID == "" {
+		return nil
+	}
+
+	// Do not resend a notification before timeout expired
+	if time.Now().Before(d.nextSend) {
 		return nil
 	}
 
@@ -40,6 +46,9 @@ func (d *DiscordNotification) Send(p Person) error {
 	if err != nil {
 		return err
 	}
+
+	// Update next send time
+	d.nextSend = time.Now().Add(d.SendTimeout)
 
 	log.Printf("Notification sent to Discord (User: %v)", user.Username)
 	return nil

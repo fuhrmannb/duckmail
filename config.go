@@ -18,7 +18,8 @@ type ArduinoCfg struct {
 }
 
 type DiscordCfg struct {
-	Token string
+	Token       string
+	SendTimeout time.Duration `mapstructure:"send_timeout"`
 }
 
 type MailgunCfg struct {
