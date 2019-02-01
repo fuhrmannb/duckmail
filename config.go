@@ -32,7 +32,10 @@ type MailgunCfg struct {
 type MailboxArduinoCfg struct {
 	LedPin     string `mapstructure:"led_pin"`
 	LDRPin     string `mapstructure:"ldr_pin"`
-	LDRTrigger int    `mapstructure:"ldr_trigger"`
+	LDRTrigger struct {
+		Min int
+		Max int
+	} `mapstructure:"ldr_trigger"`
 }
 
 type MailboxCfg struct {

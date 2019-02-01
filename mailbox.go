@@ -14,8 +14,11 @@ type Mailbox struct {
 	LEDNotifDuration        time.Duration
 	LEDNotifPushingInterval time.Duration
 
-	LDR           *aio.AnalogSensorDriver
-	LDRTrigger    int
+	LDR        *aio.AnalogSensorDriver
+	LDRTrigger struct {
+		Min int
+		Max int
+	}
 	LDRWindowSize int
 
 	Notifiers []Notifier
@@ -37,7 +40,7 @@ func (m *Mailbox) onLDRValue(s interface{}) {
 	}
 	m.ldrValue.Add(float64(s.(int)))
 
-	if m.ldrValue.Avg() < float64(m.LDRTrigger) {
+	if m.ldrValue.Avg() < float64(m.LDRTrigger.Min) {
 		if m.ledTicker == nil {
 			log.Printf("Mail received for %v (LDR value: %v)\n", m.Person.Name, m.ldrValue.Avg())
 
@@ -52,7 +55,7 @@ func (m *Mailbox) onLDRValue(s interface{}) {
 				}
 			}
 		}
-	} else {
+	} else if m.ldrValue.Avg() > float64(m.LDRTrigger.Max) {
 		if m.ledTicker != nil {
 			log.Printf("Mailbox %v now empty (LDR value: %v)\n", m.Person.Name, m.ldrValue.Avg())
 			m.ledTicker.Stop()
